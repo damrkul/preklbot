@@ -1,17 +1,18 @@
 
+// Config file to edit Token file
+const config= require('./config');
+
 
 Meteor.startup(function () {
 
+//import './config.js';
 const TelegramBot = require('node-telegram-bot-api');
 
 ///////////// BOT STUFF
 
 
-// replace the value below with the Telegram token you receive from @BotFather
-const token = '733433420:AAE7TIy9oiVEJ-mTXjqmK_5lKnfJ5KyA_no';
-
 // Create a bot that uses 'polling' to fetch new updates
-const bot = new TelegramBot(token, {polling: true});
+const bot = new TelegramBot(config.token, {polling: true});
 
 // Matches "/echo [whatever]"
 bot.onText(/echo (.+)/, (msg, match) => {
