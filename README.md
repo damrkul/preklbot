@@ -17,8 +17,14 @@ meteor npm install node-telegram-bot-api --save
 
 
 ## Find your Telegram Bot Auth Token via BotFather
-- **Edit server/telegrambot.js**
-- const token = '`YOURTOKENHERE`';
+- Edit server/config.js
+```
+
+var config =  { 
+    "token": "REPLACE_WITH_YOUR_BOT_TOKEN" 
+}
+module.exports = config;
+```
 
 
 ## After you have edited your token, simply start the bot
