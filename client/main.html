@@ -1,0 +1,47 @@
+<head>
+  <title>preklbot</title>
+</head>
+
+<body>
+
+  <div class="container">  
+    <h1>Welcome to PreklBot!</h1>
+    <br>
+      <strong>Please Add Phrases and Replies as you wish -- These are NOT case sensitive.</strong> 
+    <br>
+    <br>
+  {{> phrases}}
+  </div>
+</body>
+
+
+<template name="phrases">
+  <table  class="table table-striped order-list">
+    <thead>
+      <th>Phrase</th>
+      <th>Reply</th>
+      <th></th>
+    </thead>
+    <tbody>
+      {{#each phrasesList}}
+      <tr>
+        <td>
+          <input class="form-control phrase-phrase" style="width: 100%"  type="text" placeholder="Your Phrase" value="{{ phrase }}">
+        </td>
+        <td>
+            <textarea type="text" class="phrase-reply" style="width: 100%; height: 200px" placeholder="Your reply">{{ reply }}</textarea>
+        </td>
+        <td>
+         <button class="delete-phrase btn btn-primary" style="width: 100%;">Remove </button>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <td style="text-align: left;" colspan=3>
+        <input type="button" class="btn btn-primary btn-lg btn-block add-phrase" value="Add Phrase" />
+      </td>
+    </tfoot>
+  </table>
+
+</template>
