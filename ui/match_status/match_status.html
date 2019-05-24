@@ -1,0 +1,275 @@
+<template name="match_status">
+<body>
+
+  <div class="container">
+    <h3><a href="/">Go Back to Home</a></h3>
+        
+    <br><br>
+    <h1>Current Match Status</h1>
+    {{>scores}}
+    <br><br>
+    <h3>Prestige WorldWide Status</h3>
+   {{>pwwHeld}}
+    <br>
+     <h3>PWW Held Touchdowns</h3>
+
+    {{>pwwTDs}}
+    <br>
+    <br><br>
+    <h3>Opponent Status</h3>
+    {{>oppHeld}}
+ 
+     <br>
+     <br>
+     <h3>Opponent Held Touchdowns</h3>
+
+{{>oppTDs}}
+  </div>
+</body>
+</template>
+
+
+
+<template name="scores"> 
+    
+{{#each scoresList}}
+<table class="table table-striped order-list">
+  <thead>
+    <th>PWW</th>
+    <th>Opponnet</th>
+  </thead>
+  <tbody>
+    <td>
+      <b>Score: <input type="text"  class="pwwScore" style="width: 50px"  value="{{ pwwScore }}">
+      DriveCount: <input type="text" class="pwwDrives" style="width: 50px" value="{{ pwwDrives }}"> / <input type="text" style="width: 50px" class="totalDrives" value="{{ totalDrives }}"></b>
+    </td>
+    <td>
+      <b>Score: <input type="text" class="oppScore" style="width: 50px"  value="{{ oppScore }}">
+      DriveCount: <input type="text" class="oppDrives" style="width: 50px"  value="{{ oppDrives }}"> / {{ totalDrives }}</b>
+    </td>
+    <tr>
+      <td>
+        <b>Total NTO: <input class="pwwNTO" type="text" style="width: 50px"  value="{{ pwwNTO }}"></b>
+      </td>
+      <td>
+        <b>Total NTO: <input class="oppNTO" type="text" style="width: 50px"  value="{{ oppNTO }}"></b>
+      </td>
+    </tr>
+  </tbody>
+    
+    <b>PWW MaxScore: </b> &nbsp;{{ maxscore pwwDrives totalDrives pwwNTO pwwScore }}     
+    <br>
+     <b>OPP MaxScore:</b> &nbsp; {{ maxscore oppDrives totalDrives oppNTO oppScore }}
+    <br>
+    <br> 
+    <b>Score Difference:</b> &nbsp; {{ matchdiff totalDrives pwwDrives pwwNTO pwwScore oppDrives  oppNTO oppScore }}
+    <br>
+    <b>Points to Clinch:</b> &nbsp; {{ clinch pwwScore totalDrives oppDrives oppNTO oppScore }}
+</table>
+{{/each}}
+</template>
+
+<template name="pwwHeld">
+  <table id="PWWHoldTable" class="table table-striped order-list">
+    <thead>
+      <th>Name</th>
+      <th>Drive</th>
+      <th>Down</th>
+      <th>Yards</th>
+      <th>FG Range</th>
+      <th></th>
+    </thead>
+    <tbody>
+      {{#each pwwHoldList}}
+      <tr>
+        <td>
+          <input class="chg playername"  type="text" placeholder="PlayerName" value="{{ name }}">  
+        </td>
+        <td> 
+          {{>driveMenu}}
+        </td>
+        <td>
+          {{>downMenu}}
+        </td>
+        <td>
+            <input value="{{ yards }}" type="text" class="yards form-control" style="width: 150px"  placeholder="Yards">
+        </td>
+        <td>
+          {{>fgRangeMenu}}
+        </td>
+
+        <td>
+         <button class="delete-pwwHold btn btn-primary">Remove Player</button>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <td style="text-align: left;">
+        <input type="button" class="btn btn-primary btn-lg btn-block test" id="addPWWHolds" value="Add PWW Player Held Drive" />
+      </td>
+    </tfoot>
+  </table>    
+
+</template>
+
+
+<template name="oppHeld">
+
+  <table id="OPPHoldTable" class="table table-striped order-list">
+    <thead>
+      <th>Name</th>
+      <th>Drive</th>
+      <th>Down</th>
+      <th>Yards</th>
+      <th>FG Range</th>
+      <th></th>
+    </thead>
+    <tbody>
+      {{#each oppHoldList}}
+      <tr>
+        <td>
+          <input class="chg playername"  type="text" placeholder="PlayerName" value="{{ name }}">  
+        </td>
+        <td> 
+          {{>driveMenu}}
+        </td>
+        <td>
+          {{>downMenu}}
+        </td>
+        <td>
+            <input value="{{ yards }}" type="text" class="yards form-control" style="width: 150px"  placeholder="Yards">
+        </td>
+        <td>
+          {{>fgRangeMenu}}
+        </td>
+
+        <td>
+         <button class="delete-pwwHold btn btn-primary">Remove Player</button>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <td style="text-align: left;">
+        <input type="button" class="btn btn-primary btn-lg btn-block test" id="addOPPHolds" value="Add Opponent Held Drive" />
+      </td>
+    </tfoot>
+  </table>    
+
+</template>
+
+<template name="driveMenu">
+
+  <select style="width: 70px" class="drive form-control">
+    {{#if equals drive "1" }}
+    <option selected=selected>1</option>
+    {{else}}
+     <option>1</option>
+    {{/if}}
+
+    {{#if equals drive "2" }}
+    <option selected=selected>2</option>
+    {{else }}
+     <option>2</option>
+    {{/if}}
+
+    {{#if equals drive "3" }}
+    <option selected=selected>3</option>
+    {{ else }}
+     <option>3</option>
+    {{/if }}
+  </select>
+
+</template>
+
+
+<template name="downMenu">
+
+  <select style="width: 70px" class="down form-control">
+    {{#if equals down "1st" }}
+    <option selected=selected>1st</option>
+    {{else}}
+     <option>1</option>
+    {{/if}}
+
+    {{#if equals down "2nd" }}
+    <option selected=selected>2nd</option>
+    {{else }}
+     <option>2nd</option>
+    {{/if}}
+
+    {{#if equals down "3rd" }}
+    <option selected=selected>3rd</option>
+    {{ else }}
+     <option>3rd</option>
+    {{/if }}
+
+    {{#if equals down "4th" }}
+    <option selected=selected>4th</option>
+    {{ else }}
+     <option>4th</option>
+    {{/if }}
+  </select>
+
+</template>
+
+<template name="fgRangeMenu">
+  {{#if equals fgRange false}}
+   <input type="checkbox" class="fgrange"> FG Range
+  {{ else }}
+    <input type="checkbox" class="fgrange" checked> FG Range
+  {{/if}}
+</template>
+
+
+<template name="pwwTDs">
+  <table class="table table-striped order-list">
+    <tbody>
+      {{#each pwwTDsList}}
+        <tr>
+          <td>
+            <input class="playername" type="text" value="{{name}}" placeholder="PlayerName">
+          </td>
+          <td>
+            <button class="delete btn btn-primary">Remove Player</button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <td style="text-align: left;">
+        <input type="button" class="addplayer btn btn-primary btn-lg btn-block " value="Add PWW TouchDown" />
+      </td>
+    </tfoot>
+  </table>
+  
+
+</template>
+
+
+
+<template name="oppTDs">
+  <table  class="table table-striped order-list">
+    <tbody>
+      {{#each oppTDsList}}
+        <tr>
+          <td>
+            <input class="playername" type="text" value="{{name}}" placeholder="PlayerName">
+          </td>
+          <td>
+            <button class="delete btn btn-primary">Remove Player</button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <td style="text-align: left;">
+        <input type="button" class="addplayer btn btn-primary btn-lg btn-block " value="Add Opponent TouchDown" />
+      </td>
+    </tfoot>
+  </table>
+  
+
+</template>
+

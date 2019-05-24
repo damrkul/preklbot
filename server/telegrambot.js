@@ -3,6 +3,7 @@
 const config= require('./config');
 
 
+const plugin= require('./plugins');
 Meteor.startup(function () {
 
 //import './config.js';
@@ -29,13 +30,14 @@ bot.onText(/echo (.+)/, (msg, match) => {
 
 // Listen for any kind of message. There are different kinds of
 // messages.
-
-var getCollection = function(collection, msg) {
-    var MongoClient = require('mongodb').MongoClient;
+  
+global.MongoClient = require('mongodb').MongoClient;
+/*var getCollection = function(collection, msg) {
+    global.MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://localhost:3001/meteor";
     var xx =  {};
     if (typeof(msg.text) === "undefined") { return; }
-    MongoClient.connect(url,{ useNewUrlParser: true }, function(err, db) {
+    global.MongoClient.connect(url,{ useNewUrlParser: true }, function(err, db) {
         if (err) throw err;
         var dbo = db.db("meteor");
         dbo.collection(collection).find({}).toArray((err, result) => {
@@ -55,5 +57,20 @@ var getCollection = function(collection, msg) {
 bot.on('message', (msg) => {
   getCollection("phrases",msg);
 });
+*/
+
+var plugins = require("./plugins.js");
+
+console.log("HEHEHEHHEHE");
+console.log(plugins.length);
+
+eval(plugins[1]);
+eval(plugins[0]);
+eval(plugins[2]);
+//eval(plugins[1]);
+//console.log(plugins[0]);
+//console.log(plugins[1]);
+//console.log(plugins[0]);
+
 
 });
