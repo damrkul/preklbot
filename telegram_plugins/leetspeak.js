@@ -2,7 +2,7 @@
 
 var LeetSpeak = function(msg) { 
 
-
+  
 if (typeof(msg.text) === "undefined") { return; }
 msg_txt = msg.text.toString().toLowerCase();
 if (!msg_txt.includes("!leet ")) { return; }
@@ -11,6 +11,7 @@ msg_txt = msg_txt.replace("!leet " , "" );
 
 
 _A = [ '4',  '@'];
+_I = [ '¡'];
 _C = [ '(', '<'];
 _E = [ '3'];
 _L = [ '1', '|'];
@@ -25,10 +26,10 @@ _l = _L[Math.floor(Math.random() * _L.length)];
 _o = _O[Math.floor(Math.random() * _O.length)]; 
 _s = _S[Math.floor(Math.random() * _S.length)]; 
 _t = _T[Math.floor(Math.random() * _T.length)]; 
+_i = _I[Math.floor(Math.random() * _I.length)]; 
 
 
-reply = msg_txt.trim().toLowerCase().replace(/a/g, _a).replace(/c/g, _c).replace(/a/g,_e).replace(/l/g,_l).replace(/o/g,_o).replace(/s/g,_s).replace(/t/g, _t).replace(/e/g,_e);
-   
+reply = msg_txt.trim().toLowerCase().replace(/a/g, _a).replace(/c/g, _c).replace(/a/g,_e).replace(/l/g,_l).replace(/o/g,_o).replace(/s/g,_s).replace(/t/g, _t).replace(/e/g,_e).replace(/i/g,_i);
 bot.sendMessage(msg.chat.id, reply );
 
 };
