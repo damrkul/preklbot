@@ -6,7 +6,6 @@ var getSummary = function(collection, msg) {
     var xx =  {};
     if (typeof(msg.text) === "undefined") { return; }
     msg_txt = msg.text.toString().toLowerCase();
-    console.log("HEHE");
     if (msg_txt.includes("match summary")) {
 
 
