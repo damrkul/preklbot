@@ -10,10 +10,16 @@ Template.phrases.events({
   'keyup .phrase-phrase ': function(e){
     phrases.update({_id: this._id}, {$set: { phrase: $(e.target).val()}});
   },
-  'keyup .phrase-reply ': function(e){
-    phrases.update({_id: this._id}, {$set: { reply: $(e.target).val()}});
+  'paste .phrase-phrase ': function(e){
+    phrases.update({_id: this._id}, {$set: { phrase: $(e.target).val()}});
   },
 
+  'keyup  .phrase-reply ': function(e){
+    phrases.update({_id: this._id}, {$set: { reply: $(e.target).val()}});
+  },
+  'paste .phrase-reply ': function(e){
+    phrases.update({_id: this._id}, {$set: { reply: $(e.target).val()}});
+  },
   'click .delete-phrase': function () {
     phrases.remove(this._id);
   },

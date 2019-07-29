@@ -1,4 +1,3 @@
-
 // Config file to edit Token file
 const config= require('./config');
 
@@ -33,7 +32,7 @@ bot.onText(/echo (.+)/, (msg, match) => {
 
 // Add in Global Variables to use in Plugins..  
 global.MongoClient = require('mongodb').MongoClient;
-
+global.Request = require("request");
 
 
 //  LOAD IN PLUGINS

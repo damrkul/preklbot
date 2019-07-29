@@ -1,4 +1,4 @@
-<template name="match_status">
+<template name="r1_match_status">
 <body>
 
   <div class="container">
@@ -6,72 +6,71 @@
         
     <br><br>
     <h1>Current Match Status</h1>
-    {{>scores}}
+    {{>r1scores}}
     <br><br>
-    <h3>Prestige WorldWide Status</h3>
-   {{>pwwHeld}}
+    <h3>Relentless Ones Status</h3>
+   {{>r1Held}}
     <br>
-     <h3>PWW Held Touchdowns</h3>
+     <h3>R1 Held Touchdowns</h3>
 
-    {{>pwwTDs}}
+    {{>r1TDs}}
     <br>
     <br><br>
     <h3>Opponent Status</h3>
-    {{>oppHeld}}
+    {{>r1oppHeld}}
  
      <br>
      <br>
      <h3>Opponent Held Touchdowns</h3>
 
-{{>oppTDs}}
+{{>r1oppTDs}}
   </div>
 </body>
 </template>
 
 
 
-<template name="scores"> 
+<template name="r1scores"> 
     
-{{#each scoresList}}
+{{#each r1scoresList}}
 <table class="table table-striped order-list">
   <thead>
     <th>Opponnet</th>
-    <th>PWW</th>
+    <th>Relentless Ones</th>
   </thead>
   <tbody>
     <td>
-      <b>Score: <input type="text" class="oppScore" style="width: 50px"  value="{{ oppScore }}">
-      DriveCount: <input type="text" class="oppDrives" style="width: 50px"  value="{{ oppDrives }}"> / {{ totalDrives }}</b>
+      <b>Score: <input type="text" class="r1oppScore" style="width: 50px"  value="{{ r1oppScore }}">
+      DriveCount: <input type="text" class="r1oppDrives" style="width: 50px"  value="{{ r1oppDrives }}"> / {{ totalDrives }}</b>
     </td>
     <td>
-      <b>Score: <input type="text"  class="pwwScore" style="width: 50px"  value="{{ pwwScore }}">
-      DriveCount: <input type="text" class="pwwDrives" style="width: 50px" value="{{ pwwDrives }}"> / <input type="text" style="width: 50px" class="totalDrives" value="{{ totalDrives }}"></b>
+      <b>Score: <input type="text"  class="r1Score" style="width: 50px"  value="{{ r1Score }}">
+      DriveCount: <input type="text" class="r1Drives" style="width: 50px" value="{{ r1Drives }}"> / <input type="text" style="width: 50px" class="totalDrives" value="{{ totalDrives }}"></b>
     </td>
     <tr>
       <td>
-        <b>Total NTO: <input class="oppNTO" type="text" style="width: 50px"  value="{{ oppNTO }}"></b>
+        <b>Total NTO: <input class="r1oppNTO" type="text" style="width: 50px"  value="{{ r1oppNTO }}"></b>
       </td>
       <td>
-        <b>Total NTO: <input class="pwwNTO" type="text" style="width: 50px"  value="{{ pwwNTO }}"></b>
+        <b>Total NTO: <input class="r1NTO" type="text" style="width: 50px"  value="{{ r1NTO }}"></b>
       </td>
     </tr>
   </tbody>
     
-    <b>PWW MaxScore: </b> &nbsp;{{ maxscore pwwDrives totalDrives pwwNTO pwwScore }}   ( PPD: {{ ppd pwwScore pwwDrives  }} ) 
+    <b>R1 MaxScore: </b> &nbsp;{{ maxscore r1Drives totalDrives r1NTO r1Score }} (PPD: {{ ppd r1Score r1Drives  }})    
     <br>
-     <b>OPP MaxScore:</b> &nbsp; {{ maxscore oppDrives totalDrives oppNTO oppScore }}  ( PPD: {{ ppd oppScore oppDrives }} )
+     <b>R1OPP MaxScore:</b> &nbsp; {{ maxscore r1oppDrives totalDrives r1oppNTO r1oppScore }} (PPD: {{ ppd r1oppScore r1oppDrives  }})
     <br>
-
     <br> 
-    <b>Score Difference:</b> &nbsp; {{ matchdiff totalDrives pwwDrives pwwNTO pwwScore oppDrives  oppNTO oppScore }}
+    <b>Score Difference:</b> &nbsp; {{ matchdiff totalDrives r1Drives r1NTO r1Score r1oppDrives  r1oppNTO r1oppScore }}
     <br>
-    <b>Points to Clinch:</b> &nbsp; {{ clinch pwwScore totalDrives oppDrives oppNTO oppScore }}
+    <b>Points to Clinch:</b> &nbsp; {{ clinch r1Score totalDrives r1oppDrives r1oppNTO r1oppScore }}
 </table>
 {{/each}}
 </template>
 
-<template name="pwwHeld">
-  <table id="PWWHoldTable" class="table table-striped order-list">
+<template name="r1Held">
+  <table id="R1HoldTable" class="table table-striped order-list">
     <thead>
       <th>Name</th>
       <th>Drive</th>
@@ -81,7 +80,7 @@
       <th></th>
     </thead>
     <tbody>
-      {{#each pwwHoldList}}
+      {{#each r1HoldList}}
       <tr>
         <td>
           <input class="chg playername"  type="text" placeholder="PlayerName" value="{{ name }}">  
@@ -100,14 +99,14 @@
         </td>
 
         <td>
-         <button class="delete-pwwHold btn btn-primary">Remove Player</button>
+         <button class="delete-r1Hold btn btn-primary">Remove Player</button>
         </td>
       </tr>
       {{/each}}
     </tbody>
     <tfoot>
       <td style="text-align: left;">
-        <input type="button" class="btn btn-primary btn-lg btn-block test" id="addPWWHolds" value="Add PWW Player Held Drive" />
+        <input type="button" class="btn btn-primary btn-lg btn-block test" id="addR1Holds" value="Add R1 Player Held Drive" />
       </td>
     </tfoot>
   </table>    
@@ -115,9 +114,9 @@
 </template>
 
 
-<template name="oppHeld">
+<template name="r1oppHeld">
 
-  <table id="OPPHoldTable" class="table table-striped order-list">
+  <table id="R1OPPHoldTable" class="table table-striped order-list">
     <thead>
       <th>Name</th>
       <th>Drive</th>
@@ -127,7 +126,7 @@
       <th></th>
     </thead>
     <tbody>
-      {{#each oppHoldList}}
+      {{#each r1oppHoldList}}
       <tr>
         <td>
           <input class="chg playername"  type="text" placeholder="PlayerName" value="{{ name }}">  
@@ -146,20 +145,20 @@
         </td>
 
         <td>
-         <button class="delete-pwwHold btn btn-primary">Remove Player</button>
+         <button class="delete-r1Hold btn btn-primary">Remove Player</button>
         </td>
       </tr>
       {{/each}}
     </tbody>
     <tfoot>
       <td style="text-align: left;">
-        <input type="button" class="btn btn-primary btn-lg btn-block test" id="addOPPHolds" value="Add Opponent Held Drive" />
+        <input type="button" class="btn btn-primary btn-lg btn-block test" id="addR1OPPHolds" value="Add Opponent Held Drive" />
       </td>
     </tfoot>
   </table>    
 
 </template>
-
+<!---
 <template name="driveMenu">
 
   <select style="width: 70px" class="drive form-control">
@@ -222,12 +221,12 @@
     <input type="checkbox" class="fgrange" checked> FG Range
   {{/if}}
 </template>
+-->
 
-
-<template name="pwwTDs">
+<template name="r1TDs">
   <table class="table table-striped order-list">
     <tbody>
-      {{#each pwwTDsList}}
+      {{#each r1TDsList}}
         <tr>
           <td>
             <input class="playername" type="text" value="{{name}}" placeholder="PlayerName">
@@ -240,7 +239,7 @@
     </tbody>
     <tfoot>
       <td style="text-align: left;">
-        <input type="button" class="addplayer btn btn-primary btn-lg btn-block " value="Add PWW TouchDown" />
+        <input type="button" class="addplayer btn btn-primary btn-lg btn-block " value="Add R1 TouchDown" />
       </td>
     </tfoot>
   </table>
@@ -250,10 +249,10 @@
 
 
 
-<template name="oppTDs">
+<template name="r1oppTDs">
   <table  class="table table-striped order-list">
     <tbody>
-      {{#each oppTDsList}}
+      {{#each r1oppTDsList}}
         <tr>
           <td>
             <input class="playername" type="text" value="{{name}}" placeholder="PlayerName">

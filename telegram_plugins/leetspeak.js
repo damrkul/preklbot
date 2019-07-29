@@ -1,6 +1,7 @@
 
 
 var LeetSpeak = function(msg) { 
+if ( !config.check_chats(msg.chat.id) ) { return; }
 
   
 if (typeof(msg.text) === "undefined") { return; }

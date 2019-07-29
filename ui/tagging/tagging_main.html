@@ -1,0 +1,51 @@
+<template name="tagging_main">
+<head>
+  <title>preklbot</title>
+</head>
+
+<body>
+
+  <div class="container">  
+    <h1>Welcome to PreklBot!</h1>
+    <br>
+      <h3><a href="/match_status">Click here PWW Match Status Page</a></h3>
+    <br>
+    <br>
+      <strong>Please Add Tags as needed... this will be only be mentioned in PWW Live Counter Chat- These are NOT case sensitive.</strong> 
+    <br>
+    <br>
+  {{> tagging}}
+  </div>
+</body>
+</template>
+
+<template name="tagging">
+  <table  class="table table-striped order-list">
+    <thead>
+      <th>Tagger</th>
+      <th>Reply</th>
+      <th></th>
+    </thead>
+    <tbody>
+      {{#each tagsList}}
+      <tr>
+        <td>
+          <input class="form-control tag-tag" style="width: 100%"  type="text" placeholder="OWNER" value="{{ tag }}">
+        </td>
+        <td>
+          <input class="form-control tag-reply" style="width: 100%"  type="text" placeholder="REPLY" value="{{ reply }}">
+        </td>
+        <td>
+         <button class="delete-tag btn btn-primary" style="width: 100%;">Remove </button>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <td style="text-align: left;" colspan=3>
+        <input type="button" class="btn btn-primary btn-lg btn-block add-tag" value="Add Tag" />
+      </td>
+    </tfoot>
+  </table>
+
+</template>

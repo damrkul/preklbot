@@ -2,6 +2,7 @@
 
 var MagicBall = function(msg) { 
 
+if ( !config.check_chats(msg.chat.id) ) { return; }
 
 if (typeof(msg.text) === "undefined") { return; }
 msg_txt = msg.text.toString().toLowerCase();

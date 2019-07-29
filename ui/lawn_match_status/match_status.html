@@ -1,4 +1,4 @@
-<template name="match_status">
+<template name="lawn_match_status">
 <body>
 
   <div class="container">
@@ -6,72 +6,71 @@
         
     <br><br>
     <h1>Current Match Status</h1>
-    {{>scores}}
+    {{>lawnscores}}
     <br><br>
-    <h3>Prestige WorldWide Status</h3>
-   {{>pwwHeld}}
+    <h3>Get Off My Lawn Status</h3>
+   {{>lawnHeld}}
     <br>
-     <h3>PWW Held Touchdowns</h3>
+     <h3>LAWN Held Touchdowns</h3>
 
-    {{>pwwTDs}}
+    {{>lawnTDs}}
     <br>
     <br><br>
     <h3>Opponent Status</h3>
-    {{>oppHeld}}
+    {{>lawnoppHeld}}
  
      <br>
      <br>
      <h3>Opponent Held Touchdowns</h3>
 
-{{>oppTDs}}
+{{>lawnoppTDs}}
   </div>
 </body>
 </template>
 
 
 
-<template name="scores"> 
+<template name="lawnscores"> 
     
-{{#each scoresList}}
+{{#each lawnscoresList}}
 <table class="table table-striped order-list">
   <thead>
     <th>Opponnet</th>
-    <th>PWW</th>
+    <th>Get Off My Lawn</th>
   </thead>
   <tbody>
     <td>
-      <b>Score: <input type="text" class="oppScore" style="width: 50px"  value="{{ oppScore }}">
-      DriveCount: <input type="text" class="oppDrives" style="width: 50px"  value="{{ oppDrives }}"> / {{ totalDrives }}</b>
+      <b>Score: <input type="text" class="lawnoppScore" style="width: 50px"  value="{{ lawnoppScore }}">
+      DriveCount: <input type="text" class="lawnoppDrives" style="width: 50px"  value="{{ lawnoppDrives }}"> / {{ totalDrives }}</b>
     </td>
     <td>
-      <b>Score: <input type="text"  class="pwwScore" style="width: 50px"  value="{{ pwwScore }}">
-      DriveCount: <input type="text" class="pwwDrives" style="width: 50px" value="{{ pwwDrives }}"> / <input type="text" style="width: 50px" class="totalDrives" value="{{ totalDrives }}"></b>
+      <b>Score: <input type="text"  class="lawnScore" style="width: 50px"  value="{{ lawnScore }}">
+      DriveCount: <input type="text" class="lawnDrives" style="width: 50px" value="{{ lawnDrives }}"> / <input type="text" style="width: 50px" class="totalDrives" value="{{ totalDrives }}"></b>
     </td>
     <tr>
       <td>
-        <b>Total NTO: <input class="oppNTO" type="text" style="width: 50px"  value="{{ oppNTO }}"></b>
+        <b>Total NTO: <input class="lawnoppNTO" type="text" style="width: 50px"  value="{{ lawnoppNTO }}"></b>
       </td>
       <td>
-        <b>Total NTO: <input class="pwwNTO" type="text" style="width: 50px"  value="{{ pwwNTO }}"></b>
+        <b>Total NTO: <input class="lawnNTO" type="text" style="width: 50px"  value="{{ lawnNTO }}"></b>
       </td>
     </tr>
   </tbody>
     
-    <b>PWW MaxScore: </b> &nbsp;{{ maxscore pwwDrives totalDrives pwwNTO pwwScore }}   ( PPD: {{ ppd pwwScore pwwDrives  }} ) 
+    <b>LAWN MaxScore: </b> &nbsp;{{ maxscore lawnDrives totalDrives lawnNTO lawnScore }} (PPD: {{ ppd lawnScore lawnDrives  }})    
     <br>
-     <b>OPP MaxScore:</b> &nbsp; {{ maxscore oppDrives totalDrives oppNTO oppScore }}  ( PPD: {{ ppd oppScore oppDrives }} )
+     <b>LAWNOPP MaxScore:</b> &nbsp; {{ maxscore lawnoppDrives totalDrives lawnoppNTO lawnoppScore }} (PPD: {{ ppd lawnoppScore lawnoppDrives  }})
     <br>
-
     <br> 
-    <b>Score Difference:</b> &nbsp; {{ matchdiff totalDrives pwwDrives pwwNTO pwwScore oppDrives  oppNTO oppScore }}
+    <b>Score Difference:</b> &nbsp; {{ matchdiff totalDrives lawnDrives lawnNTO lawnScore lawnoppDrives  lawnoppNTO lawnoppScore }}
     <br>
-    <b>Points to Clinch:</b> &nbsp; {{ clinch pwwScore totalDrives oppDrives oppNTO oppScore }}
+    <b>Points to Clinch:</b> &nbsp; {{ clinch lawnScore totalDrives lawnoppDrives lawnoppNTO lawnoppScore }}
 </table>
 {{/each}}
 </template>
 
-<template name="pwwHeld">
-  <table id="PWWHoldTable" class="table table-striped order-list">
+<template name="lawnHeld">
+  <table id="LAWNHoldTable" class="table table-striped order-list">
     <thead>
       <th>Name</th>
       <th>Drive</th>
@@ -81,7 +80,7 @@
       <th></th>
     </thead>
     <tbody>
-      {{#each pwwHoldList}}
+      {{#each lawnHoldList}}
       <tr>
         <td>
           <input class="chg playername"  type="text" placeholder="PlayerName" value="{{ name }}">  
@@ -100,14 +99,14 @@
         </td>
 
         <td>
-         <button class="delete-pwwHold btn btn-primary">Remove Player</button>
+         <button class="delete-lawnHold btn btn-primary">Remove Player</button>
         </td>
       </tr>
       {{/each}}
     </tbody>
     <tfoot>
       <td style="text-align: left;">
-        <input type="button" class="btn btn-primary btn-lg btn-block test" id="addPWWHolds" value="Add PWW Player Held Drive" />
+        <input type="button" class="btn btn-primary btn-lg btn-block test" id="addLAWNHolds" value="Add LAWN Player Held Drive" />
       </td>
     </tfoot>
   </table>    
@@ -115,9 +114,9 @@
 </template>
 
 
-<template name="oppHeld">
+<template name="lawnoppHeld">
 
-  <table id="OPPHoldTable" class="table table-striped order-list">
+  <table id="LAWNOPPHoldTable" class="table table-striped order-list">
     <thead>
       <th>Name</th>
       <th>Drive</th>
@@ -127,7 +126,7 @@
       <th></th>
     </thead>
     <tbody>
-      {{#each oppHoldList}}
+      {{#each lawnoppHoldList}}
       <tr>
         <td>
           <input class="chg playername"  type="text" placeholder="PlayerName" value="{{ name }}">  
@@ -146,20 +145,20 @@
         </td>
 
         <td>
-         <button class="delete-pwwHold btn btn-primary">Remove Player</button>
+         <button class="delete-lawnHold btn btn-primary">Remove Player</button>
         </td>
       </tr>
       {{/each}}
     </tbody>
     <tfoot>
       <td style="text-align: left;">
-        <input type="button" class="btn btn-primary btn-lg btn-block test" id="addOPPHolds" value="Add Opponent Held Drive" />
+        <input type="button" class="btn btn-primary btn-lg btn-block test" id="addLAWNOPPHolds" value="Add Opponent Held Drive" />
       </td>
     </tfoot>
   </table>    
 
 </template>
-
+<!---
 <template name="driveMenu">
 
   <select style="width: 70px" class="drive form-control">
@@ -222,12 +221,12 @@
     <input type="checkbox" class="fgrange" checked> FG Range
   {{/if}}
 </template>
+-->
 
-
-<template name="pwwTDs">
+<template name="lawnTDs">
   <table class="table table-striped order-list">
     <tbody>
-      {{#each pwwTDsList}}
+      {{#each lawnTDsList}}
         <tr>
           <td>
             <input class="playername" type="text" value="{{name}}" placeholder="PlayerName">
@@ -240,7 +239,7 @@
     </tbody>
     <tfoot>
       <td style="text-align: left;">
-        <input type="button" class="addplayer btn btn-primary btn-lg btn-block " value="Add PWW TouchDown" />
+        <input type="button" class="addplayer btn btn-primary btn-lg btn-block " value="Add LAWN TouchDown" />
       </td>
     </tfoot>
   </table>
@@ -250,10 +249,10 @@
 
 
 
-<template name="oppTDs">
+<template name="lawnoppTDs">
   <table  class="table table-striped order-list">
     <tbody>
-      {{#each oppTDsList}}
+      {{#each lawnoppTDsList}}
         <tr>
           <td>
             <input class="playername" type="text" value="{{name}}" placeholder="PlayerName">

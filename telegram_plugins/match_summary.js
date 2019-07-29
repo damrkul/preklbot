@@ -1,7 +1,8 @@
-  
+     
 
 
 var getSummary = function(collection, msg) {
+if ( !config.check_chats(msg.chat.id) ) { return; }
     var url = "mongodb://localhost:3001/meteor";
     var xx =  {};
     if (typeof(msg.text) === "undefined") { return; }
@@ -15,14 +16,14 @@ var getSummary = function(collection, msg) {
         var dbo = db.db("meteor");
         dbo.collection(collection).find({}).toArray((err, result) => {
             var maxscore = function(drives_played,total_drives,ntos,score) {
-                return parseInt(score) + ((Math.abs(total_drives-drives_played) - ntos) * 8)
+                return parseInt(score) + ((Math.abs(total_drives-drives_played) + parseInt(ntos)) * 8)
             };
             var clinchCalc = function(pwwScore ,totalDrives, oppDrives,oppNTO,oppScore) {
-                return  (parseInt(oppScore) + ((Math.abs(totalDrives -oppDrives) - oppNTO) * 8)) - pwwScore + 1;
+                return  (parseInt(oppScore) + ((Math.abs(totalDrives -oppDrives) + parseInt(oppNTO)) * 8)) - pwwScore + 1;
             };
             var  matchdiffCalc = function(totalDrives,pwwDrives,pwwNTO,pwwScore,oppDrives,oppNTO,oppScore) {
 
-                 return (parseInt(pwwScore) + ((Math.abs(totalDrives -pwwDrives) - pwwNTO) * 8)) - (parseInt(oppScore) + ((Math.abs(totalDrives -oppDrives) - oppNTO) * 8))  ;
+                 return (parseInt(pwwScore) + ((Math.abs(totalDrives -pwwDrives) + parseInt(pwwNTO)) * 8)) - (parseInt(oppScore) + ((Math.abs(totalDrives -oppDrives) + parseInt(oppNTO)) * 8))  ;
             };
             var ppdCalc = function(score,total_drives) {
                 return parseFloat(score) / parseFloat(total_drives);
