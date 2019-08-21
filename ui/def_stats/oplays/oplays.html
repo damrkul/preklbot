@@ -1,0 +1,233 @@
+
+<template name="o_play">
+<div class="container">
+ <table  class="table table-striped order-list">
+    <thead>
+      <th>PlayName</th>
+      <th>Type</th>
+      <th>Scheme</th>
+      <th>Coach</th>
+      <th></th>
+    </thead>
+    <tbody>
+      {{#each oList }}
+      <tr>
+        <td>
+          <input class="form-control oplay-name" style="width: 100%"  type="text" placeholder="Your Phrase" value="{{ off_play }}">
+        </td>
+        <td>
+          {{> off_type_menu }} 
+        </td>
+        <td>
+            {{> off_scheme_menu }}
+        </td>
+        <td>
+            {{> off_coach_menu }}
+        </td>
+
+        <td>
+         <button class="delete-oplay btn btn-primary" style="width: 100%;">Remove </button>
+        </td>
+    
+      </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <td style="text-align: left;" colspan=3>
+        <input type="button" class="btn btn-primary btn-lg btn-block add-oplay" value="Add Offensive Play" />
+      </td>
+    </tfoot>
+  </table>
+</div>
+</template>
+
+
+<template name="off_type_menu">
+
+
+  <select style="width: 120px" class="oplay-type form-control">
+    {{#if equals type "Run" }}
+    <option selected=selected>Run</option>
+    {{else}}
+     <option>Run</option>
+    {{/if}}
+
+    {{#if equals type "Short Pass" }}
+    <option selected=selected>Short Pass</option>
+    {{else }}
+     <option>Short Pass</option>
+    {{/if}}
+
+    {{#if equals type "Long Pass" }}
+    <option selected=selected>Long Pass</option>
+    {{ else }}
+     <option>Long Pass</option>
+    {{/if }}
+
+    {{#if equals type "Play Action" }}
+    <option selected=selected>Play Action</option>
+    {{ else }}
+     <option>Play Action</option>
+    {{/if }}
+
+  </select>
+</template>
+
+
+
+
+<template name="off_formation_menu">
+  <select style="width: 124px" class="oplay-formation form-control">
+    {{#if equals formation "I Formation" }}
+    <option selected=selected>I Formation</option>
+    {{else}}
+     <option>I Formation</option>
+    {{/if}}
+
+    {{#if equals formation "Shotgun" }}
+    <option selected=selected>Shotgun</option>
+    {{else }}
+     <option>Shotgun</option>
+    {{/if}}
+
+  </select>
+
+</template>
+
+
+
+
+
+<template name="off_scheme_menu">
+  <select style="width: 124px" class="oplay-scheme form-control">
+    {{#if equals scheme "West Coast" }}
+    <option selected=selected>West Coast</option>
+    {{else}}
+     <option>West Coast</option>
+    {{/if}}
+
+    {{#if equals scheme "Vertical" }}
+    <option selected=selected>Vertical</option>
+    {{else }}
+     <option>Vertical</option>
+    {{/if}}
+
+    {{#if equals scheme "Spread" }}
+    <option selected=selected>Spread</option>
+    {{else }}
+     <option>Spread</option>
+    {{/if}}
+
+    {{#if equals scheme "Smashmouth" }}
+    <option selected=selected>Smashmouth</option>
+    {{else }}
+     <option>Smashmouth</option>
+    {{/if}}
+
+    {{#if equals scheme "All" }}
+    <option selected=selected>All</option>
+    {{else }}
+     <option>All</option>
+    {{/if}}
+
+  </select>
+
+
+</template>
+
+
+
+
+
+<template name="off_coach_menu">
+  <select style="width: 124px" class="oplay-coach form-control">
+    {{#if equals coach "Core Scheme" }}
+    <option selected=selected>Core Scheme</option>
+    {{else}}
+     <option>Core Scheme</option>
+    {{/if}}
+
+    {{#if equals coach "John Madden" }}
+    <option selected=selected>John Madden</option>
+    {{else }}
+     <option>John Madden</option>
+    {{/if}}
+
+    {{#if equals coach "Jason Garrett" }}
+    <option selected=selected>Jason Garrett</option>
+    {{else }}
+     <option>Jason Garrett</option>
+    {{/if}}
+
+    {{#if equals coach "Ron Rivera" }}
+    <option selected=selected>Ron Rivera</option>
+    {{else }}
+     <option>Ron Rivera</option>
+    {{/if}}
+
+
+    {{#if equals coach "Frank Reich" }}
+    <option selected=selected>Frank Reich</option>
+    {{else }}
+     <option>Frank Reich</option>
+    {{/if}}
+
+    {{#if equals coach "Bruce Arians" }}
+    <option selected=selected>Bruce Arians</option>
+    {{else }}
+     <option>Bruce Arians</option>
+    {{/if}}
+
+    {{#if equals coach "John Harbaugh" }}
+    <option selected=selected>John Harbaugh</option>
+    {{else }}
+     <option>John Harbaugh</option>
+    {{/if}}
+
+    {{#if equals coach "Sean McDermott" }}
+    <option selected=selected>Sean McDermott</option>
+    {{else }}
+     <option>Sean McDermott</option>
+    {{/if}}
+
+    {{#if equals coach "Doug Pederson" }}
+    <option selected=selected>Doug Pederson</option>
+    {{else }}
+     <option>Doug Pederson</option>
+    {{/if}}
+    
+
+    {{#if equals coach "Anthony Lynn" }}
+    <option selected=selected>Anthony Lynn</option>
+    {{else }}
+     <option>Anthony Lynn</option>
+    {{/if}}
+
+    {{#if equals coach "Mike Vrabel" }}
+    <option selected=selected>Mike Vrabel</option>
+    {{else }}
+     <option>Mike Vrabel</option>
+    {{/if}}
+
+    {{#if equals coach "Freddie Kitchens" }}
+    <option selected=selected>Freddie Kitchens</option>
+    {{else }}
+     <option>Freddie Kitchens</option>
+    {{/if}}
+
+    {{#if equals coach "Pat Shurmur" }}
+    <option selected=selected>Pat Shurmur</option>
+    {{else }}
+     <option>Pat Shurmur</option>
+    {{/if}}
+
+    {{#if equals coach "Andy Reid" }}
+    <option selected=selected>Andy Reid</option>
+    {{else }}
+     <option>Andy Reid</option>
+    {{/if}}
+
+  </select>
+
+</template>
+

@@ -1,0 +1,126 @@
+
+<template name="d_play">
+
+ <table  class="table table-striped order-list">
+    <thead>
+      <th>PlayName</th>
+      <th>Type</th>
+      <th>Formation</th>
+      <th>Blitz</th>
+      <th></th>
+    </thead>
+    <tbody>
+      {{#each defensive_playsList }}
+      <tr>
+        <td>
+          <input class="form-control phrase-phrase" style="width: 100%"  type="text" placeholder="Your Phrase" value="{{ def_play }}">
+        </td>
+        <td>
+          {{> type_menu }} 
+        </td>
+        <td>
+          {{> formation_menu }}
+        </td>
+        <td>
+          {{> blitz_menu}}
+        </td>
+        <td>
+         <button class="delete-phrase btn btn-primary" style="width: 100%;">Remove </button>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <td style="text-align: left;" colspan=3>
+        <input type="button" class="btn btn-primary btn-lg btn-block add-phrase" value="Add Phrase" />
+      </td>
+    </tfoot>
+  </table>
+
+</template>
+
+
+<template name="type_menu">
+
+
+  <select style="width: 70px" class="drive form-control">
+    {{#if equals type "Man" }}
+    <option selected=selected>Man</option>
+    {{else}}
+     <option>Man</option>
+    {{/if}}
+
+    {{#if equals type "Zone" }}
+    <option selected=selected>Zone</option>
+    {{else }}
+     <option>Zone</option>
+    {{/if}}
+
+    {{#if equals type "ST" }}
+    <option selected=selected>ST</option>
+    {{ else }}
+     <option>ST</option>
+    {{/if }}
+  </select>
+</template>
+
+
+
+
+<template name="formation_menu">
+  <select style="width: 70px" class="drive form-control">
+    {{#if equals formation "3-4" }}
+    <option selected=selected>3-4</option>
+    {{else}}
+     <option>3-4</option>
+    {{/if}}
+
+    {{#if equals formation "4-3" }}
+    <option selected=selected>4-3</option>
+    {{else }}
+     <option>4-3</option>
+    {{/if}}
+
+    {{#if equals formation "Nickel" }}
+    <option selected=selected>Nickel</option>
+    {{ else }}
+     <option>Nickel</option>
+    {{/if }}
+
+    {{#if equals formation "Dime" }}
+    <option selected=selected>Dime</option>
+    {{ else }}
+     <option>Dime</option>
+    {{/if }}
+
+    {{#if equals formation "Quarter" }}
+    <option selected=selected>Quarter</option>
+    {{ else }}
+     <option>Quarter</option>
+    {{/if }}
+
+    {{#if equals formation "Goal Line" }}
+    <option selected=selected>Goal Line</option>
+    {{ else }}
+     <option>Goal Line</option>
+    {{/if }}
+
+    {{#if equals formation "Special Teams" }}
+    <option selected=selected>Special Teams</option>
+    {{ else }}
+     <option>Special Teams</option>
+    {{/if }}
+
+  </select>
+
+</template>
+
+
+
+<template name="blitz_menu">
+  {{#if equals blitz false}}
+   <input type="checkbox" class="blitze"> Blitz
+  {{ else }}
+    <input type="checkbox" class="blitz" checked> Blitz
+  {{/if}}
+</template>

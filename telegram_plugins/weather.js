@@ -1,6 +1,5 @@
   
 var WeatherCheck = function(msg) { 
-console.log("HEHE");
   
 if (typeof(msg.text) === "undefined") { return; }
 msg_txt = msg.text.toString().toLowerCase();

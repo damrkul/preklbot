@@ -1,0 +1,155 @@
+
+
+function GetSortOrder(prop) {
+    return function(a, b) {
+        if (a[prop] > b[prop]) {
+            return 1;
+        } else if (a[prop] < b[prop]) {
+            return -1;
+        }
+        return 0;
+    }
+}
+var PlayerSearch = function(msg) { 
+
+var player_search_dir="/var/www/rekous/cms/assets/player_search";
+
+if ( !config.check_chats(msg.chat.id) ) { return; }
+
+  
+if (typeof(msg.text) === "undefined") { return; }
+if (!msg_txt.includes("!playersearch ")) { return; }
+console.log("RUNNING PALYER SERACH");
+//msg_txt = msg_txt.replace("!playersearch " , "" );
+
+
+txt = msg_txt.trim().replace("!playersearch ", "").split(" ");
+
+search_type = txt[0];
+search_criteria = txt[1];
+
+
+
+url = player_search.get_url(search_type, search_criteria) ;
+
+attr = player_search.get_attributes(search_type, search_criteria);
+
+console.log(url);
+
+var timestamp = Date.now();
+global.scraper
+  .get(url)
+  //.get('https://root-tools.xyz/display-players.php?program=Signature')
+  .then(function(tableData) {
+    var thead = "";
+    var tbody = "";
+    var data = tableData[9];
+    sortby = "OVR"
+    if (tableData[9][0]["0"] == undefined ) {
+    attr = player_search.transform(attr);
+    sortby = transform_sort(sortby);
+    } 
+    
+    
+
+    thead="<thead><tr>"
+    attr.forEach( key => thead += "<th>" + key.replace("*","").replace("_2","").replace("_","")  + "</th>" );
+    thead +="</thead>";
+
+
+    tbody +="<tbody>";
+    for (var i=0;i<tableData[9].length;i++) {
+        player = tableData[9][i];
+        var row = "<tr>";
+        attr.forEach( key =>  (player.hasOwnProperty(key)) ? row+="<td>" + player[key]  +"</td>" : '' );
+        row += "</tr>";
+        tbody += row;
+    }
+
+    tbody += "</tbody>";
+
+
+var html  =`
+<html>
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="http://www.rekous.com/js/bootstrap.min.js"></script>
+
+
+<body>
+
+<center>
+<br>
+
+<table class="table table-bordered table-striped">
+
+`;
+
+html += thead;
+html += tbody;
+
+
+html +=`
+</table>
+
+</body>
+</html>
+`;
+
+var fs = require("fs");
+
+fs.writeFileSync(player_search_dir +"/player_search_"+timestamp+".html", html, (err) => {
+  if (err) console.log(err);
+});
+
+});
+
+
+    bot.sendMessage(msg.chat.id, "Creating Image..please wait 10 seconds.." );
+
+
+//constexec = require('child_process').exec;
+/*var yourscript = global.execSync("xvfb-run --server-args='-screen 0, 1920x1080x24' /var/www/rekous/site/slack/player_search/create_pic/webkit2png.py -o "+ player_search_dir + "/player_search_"+timestamp+".png http://cms.rekous.com/assets/player_search/player_search_"+timestamp+".html",
+        (error, stdout, stderr) => {
+            console.log(stdout);
+            console.log(stderr);
+            if (error !== null) {
+                console.log(`exec error: ${error}`);
+            }
+        bot.sendMessage(msg.chat.id, "http://cms.rekous.com/assets/player_search/player_search_"+timestamp+".png" );
+        });
+*/
+//global.execSync("xvfb-run --server-args='-screen 0, 1920x1080x24' /var/www/rekous/site/slack/player_search/create_pic/webkit2png.py -o "+ player_search_dir + "/player_search_"+timestamp+".png http://cms.rekous.com/assets/player_search/player_search_"+timestamp+".html");
+
+console.log("xvfb-run --server-args='-screen 0, 1920x1080x24' /var/www/rekous/site/slack/player_search/create_pic/webkit2png.py -o "+ player_search_dir + "/player_search_"+timestamp+".png http://cms.rekous.com/assets/player_search/player_search_"+timestamp+".html");
+
+
+
+
+const { exec } = require('child_process');
+exec("sleep 10;xvfb-run --server-args='-screen 0, 1920x1080x24' /var/www/rekous/site/slack/player_search/create_pic/webkit2png.py -o "+ player_search_dir + "/player_search_"+timestamp+".png http://cms.rekous.com/assets/player_search/player_search_"+timestamp+".html", (err, stdout, stderr) => {
+  if (err) {
+    //some err occurred
+    console.error(err)
+  } else {
+   // the *entire* stdout and stderr (buffered)
+    console.log("SENDING");
+    bot.sendMessage(msg.chat.id, "http://cms.rekous.com/assets/player_search/player_search_"+timestamp+".png" )
+  }
+});
+
+
+
+
+
+
+
+
+//bot.sendMessage(msg.chat.id, "http://cms.rekous.com/assets/player_search/player_search_"+timestamp+".png" );
+
+};
+bot.on('message', (msg) => {
+  PlayerSearch(msg);
+})

@@ -1,0 +1,248 @@
+
+<template name="def_stats_main">
+
+
+
+
+<div class="container">
+<h1>Defensive Stats </h1>
+
+<br>
+<br>
+<b><a class="alert alert-primary" href="/add_defplays">Add D Plays</a></b>
+<b><a class="alert alert-primary" href="/add_offplays">Add O Plays</a></b>
+
+<br>
+<br>
+<br>
+<br>
+
+{{> show_plays def_list=d_34  _formation="3-4" classColor="primary"   }}
+{{> show_plays def_list=d_43  _formation="4-3" classColor="secondary" }}
+{{> show_plays def_list=d_nickel  _formation="Nickel" classColor="danger" }}
+{{> show_plays def_list=d_dime _formation="Dime" classColor="warning" }}
+{{> show_plays def_list=d_quarter  _formation="Quarter" classColor="info" }}
+{{> show_plays def_list=d_goalline _formation="Goal Line"  classColor="purple" }}
+{{> show_plays def_list=d_specialteams _formation="Special Teams" classColor="dark" }}
+
+<style>
+.alert-purple {
+    background: #a294ff;
+}
+
+.zoom {
+}
+
+.zoom:hover {
+  transform: scale(1.75); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+</style>
+
+
+
+
+
+
+<script>
+
+$(document).ready(function() {
+
+ $(".34-hide").hide();
+  $(".caption-34").click(function() {
+    var isHidden = $(".34-hide").is(':hidden');
+    if (isHidden) {
+      $(".34-hide").show();
+    } else {
+      $(".34-hide").hide();
+
+    }
+  })
+
+ $(".43-hide").hide();
+  $(".caption-43").click(function() {
+    var isHidden = $(".43-hide").is(':hidden');
+    if (isHidden) {
+      $(".43-hide").show();
+    } else {
+      $(".43-hide").hide();
+
+    }
+  })
+
+
+ $(".Nickel-hide").hide();
+  $(".caption-Nickel").click(function() {
+    var isHidden = $(".Nickel-hide").is(':hidden');
+    if (isHidden) {
+      $(".Nickel-hide").show();
+    } else {
+      $(".Nickel-hide").hide();
+
+    }
+  })
+
+  $(".Dime-hide").hide();
+  $(".caption-Dime").click(function() {
+    var isHidden = $(".Dime-hide").is(':hidden');
+    if (isHidden) {
+      $(".Dime-hide").show();
+    } else {
+      $(".Dime-hide").hide();
+
+    }
+  })
+
+
+ $(".Quarter-hide").hide();
+  $(".caption-Quarter").click(function() {
+    var isHidden = $(".Quarter-hide").is(':hidden');
+    if (isHidden) {
+      $(".Quarter-hide").show();
+    } else {
+      $(".Quarter-hide").hide();
+
+    }
+  })
+
+
+ $(".Goal_Line-hide").hide();
+  $(".caption-Goal_Line").click(function() {
+    var isHidden = $(".Goal_Line-hide").is(':hidden');
+    if (isHidden) {
+      $(".Goal_Line-hide").show();
+    } else {
+      $(".Goal_Line-hide").hide();
+
+    }
+  })
+
+
+ $(".Special_Teams-hide").hide();
+  $(".caption-Special_Teams").click(function() {
+    var isHidden = $(".Special_Teams-hide").is(':hidden');
+    if (isHidden) {
+      $(".Special_Teams-hide").show();
+    } else {
+      $(".Special_Teams-hide").hide();
+
+    }
+  })
+
+});
+
+
+
+</script>
+</div>
+
+</template>
+
+<template name="show_plays">
+<div class="alert alert-{{ classColor }}  caption-{{ replaceUnderScores _formation }}">{{ _formation }} Formations</div>
+
+<div class="{{ replaceUnderScores _formation }}-hide">
+<input type="text" id="{{ replaceUnderScores _formation }}-input" onkeyup="_{{ replaceUnderScores _formation }}()" placeholder="Filter play Search">
+
+<table id="{{ replaceUnderScores _formation }}-table" class="table table-bordered table-striped">
+<thead>
+<tr>
+<th>Image</th>
+<th>PlayName</th>
+<th>Type</th>
+<th>Formation</th>
+</tr>
+</thead>
+<tbody>
+{{#each def_list }}
+<tr id="{{ removeSpaces def_play }}-{{ replaceUnderScores formation }}">
+  <td><img class="zoom"  style="width: 80px !important; height: 60px !important" src="http://www.prekl.com:3000/images/{{ replaceUnderScores formation }}/{{ replaceUnderScores def_play }}.jpg"></td>
+  <td >{{ def_play }}</td>
+  <td>{{ type }}</td>
+  <td>{{ formation }}</td>
+</tr>
+<tr>
+  <td colspan="4">
+     <table style="width: 100%" class="table table-bordered table-striped" id="{{ removeSpaces def_play }}-off" data-page-length='100'>
+      <caption class="off_play">{{ def_play }} Offensive Plays</caption>
+      <thead>
+      <tr>
+        <th style="width: 250px">PlayName</th>
+        <th style="width: 130px">Type</th>
+        <th style="width: 160px;">Scheme</th>
+        <th style="width: 160px;">Coach</th>
+        <th style="width: 100%">DATA</th>
+      </tr>
+      </thead>
+
+      <tbody>
+{{#each oList }}
+      <tr>
+      <th>{{ off_play }} (Avg: {{ getAvg ../_id _id }} )</th>
+      <th>{{ type }} </th>
+      <th>{{ scheme }} </th>
+      <th>{{ coach }} </th>
+      <th><input class="playdata" value="{{ getData ../_id _id }}"  type="text" id="{{ ../_id }}-{{_id}}" style="width: 100%"></th>
+      </tr>
+{{/each }}
+      </tbody>
+      </table>
+       <script>
+$(document).ready( function () {
+   $('#{{ removeSpaces def_play }}-off').DataTable();
+} );
+
+$(document).ready(function() {
+
+ var off_table_{{ removeSpaces def_play}}_{{ replaceUnderScores formation }} =  $("#{{ removeSpaces def_play }}-{{ replaceUnderScores formation }}").closest('tr').next('tr');
+ off_table_{{ removeSpaces def_play}}_{{ replaceUnderScores formation }}.hide();
+  $("#{{ removeSpaces def_play }}-{{ replaceUnderScores formation }}").click(function() {
+    var isHidden_{{ removeSpaces def_play}}_{{ replaceUnderScores formation }} = off_table_{{ removeSpaces def_play}}_{{ replaceUnderScores formation }}.is(':hidden');
+    if (isHidden_{{removeSpaces def_play}}_{{ replaceUnderScores formation }}) {
+      off_table_{{ removeSpaces def_play}}_{{ replaceUnderScores formation }}.show();
+    } else {
+      off_table_{{ removeSpaces def_play}}_{{ replaceUnderScores formation }}.hide();
+
+    }
+  })
+});
+
+</script>
+  </td>
+    <td style="display: none">x</td>
+    <td style="display: none">x</td>
+    <td style="display: none">x</td>
+</tr>
+
+{{/each}}
+</tbody>
+
+</table>
+</div>
+<script>
+
+function _{{ replaceUnderScores _formation }}() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("{{ replaceUnderScores _formation }}-input");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("{{ replaceUnderScores _formation }}-table");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+       // tr[i].style.display = "";
+        tr[i-1].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+
+</script>
+</template>

@@ -1,0 +1,77 @@
+<template name="find_lc">
+<div class="container">
+<h1>Live Counter Helper</h1>
+
+
+<br><br>
+
+{{> lc_table }} 
+
+</div>
+
+</template>
+
+
+
+<template name="lc_table">
+<input type="text" id="find_lc-input" onkeyup="_find_lc()" placeholder="Filter play Search">
+
+<table id="find_lc-table" class="table table-striped table-bordered">
+<thead>
+<th></th>
+<th>Offensive Play</th>
+<th>Type</th>
+<th>Scheme</th>
+<th>DefensivePlays</th>
+</thead>
+
+<tbody>
+ {{#each oList }}
+<tr>
+<td></td>
+<td>{{ off_play }}</td>
+<td>{{ type }}</td>
+<td>{{ scheme }} </td>
+<td>
+{{#each getPlayData _id }}
+
+<span class="badge badge-primary">{{ findDefPlay_formation def_play }}</span> {{ findDefPlay def_play  }} <span class="badge badge-success">{{ avg }} yds</span> <span class="badge badge-secondary">{{ dataCount data }} datapoints</span><br>
+{{/each }}
+</td>
+</tr>
+{{/each }}
+</tbody>
+
+</table>
+
+<script>
+
+function _find_lc() {
+  // Declare variables 
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("find_lc-input");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("find_lc-table");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+// sleep time expects milliseconds
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+// Usage!
+</script>
+</template>
