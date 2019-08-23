@@ -1,5 +1,5 @@
 <head>
-  <title>example-app</title>
+  <title>PreklBot (ROW) - Administration </title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.2/js/tether.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
  <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
@@ -57,7 +57,7 @@
             <a class="nav-link" href="/">Telegram<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Match Status</a>
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Match Status</a>
             <div class="dropdown-menu" aria-labelledby="dropdown03">
               <a class="dropdown-item" href="/match_status">PWW</a>
               <a class="dropdown-item" href="/r1_match_status">R1</a>
@@ -66,12 +66,25 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Defensive Stats</a>
+            <a class="nav-link" href="/def_stats">Defensive Stats</a>
           </li>
 
           <li class="nav-item">
+            <a class="nav-link" href="/find_lc">Live Counter</a>
+          </li>
+          {{#if isInRole 'admin,PWW'}}
+          <li class="nav-item">
             <a class="nav-link" href="/tagging">PWW Tagging</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pww_scoresheet">PWW Scoresheet</a>
+          </li>
+          {{/if}}
+          {{#if isInRole 'admin'}}
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">PreklBot Admin</a>
+          </li>
+          {{/if}}
         </ul>
 
         <ul class="navbar-nav my-2 my-md-0">
