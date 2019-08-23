@@ -15,8 +15,12 @@
 <br>
 <br>
 <br>
-<br>
 
+<b><a class="alert alert-primary" href="/find_lc">Search DEF Stats HERE</a></b>
+<br>
+<br>
+<br>
+<hr>
 {{> show_plays def_list=d_34  _formation="3-4" classColor="primary"   }}
 {{> show_plays def_list=d_43  _formation="4-3" classColor="secondary" }}
 {{> show_plays def_list=d_nickel  _formation="Nickel" classColor="danger" }}
@@ -155,7 +159,7 @@ $(document).ready(function() {
 <tbody>
 {{#each def_list }}
 <tr id="{{ removeSpaces def_play }}-{{ replaceUnderScores formation }}">
-  <td><img class="zoom"  style="width: 80px !important; height: 60px !important" src="http://www.prekl.com:3000/images/{{ replaceUnderScores formation }}/{{ replaceUnderScores def_play }}.jpg"></td>
+  <td><img class="zoom"  style="width: 80px !important; height: 60px !important" src="http://www.prekl.com/images/{{ replaceUnderScores formation }}/{{ replaceUnderScores def_play }}.jpg"></td>
   <td >{{ def_play }}</td>
   <td>{{ type }}</td>
   <td>{{ formation }}</td>
