@@ -1,0 +1,73 @@
+<template name="admin">
+{{#if isInRole 'admin'}}
+<div class='container'>
+<h1>PreklBot Administration</h1>
+
+<br><br>
+
+<a class="btn btn-primary" href="/admin/add_user">Click Here to Add new User to PreklBot</a>
+<br><br>
+<table class="table table-striped table-bordered">
+<thead>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Privledges</th>
+    <th>Action</th>
+</thead>
+
+<tbody>
+{{#each users }}
+<tr>
+    <td>{{ profile.name }}</td>
+    <td>{{ email }}</td>
+    <td>{{> adminRoles }} </td>
+    <td>
+    {{#if checkNotAdmin roles }}
+      <button class="remove-user btn btn-primary">Remove User</button> 
+    {{/if }} 
+    </td>
+</tr>
+{{/each }}
+
+</tbody>
+</table>
+
+
+</div>
+{{else}} 
+You are not an admin.  So you cannot see this site.  If you're a ROW admin, talk to REKOUS
+
+{{/if }}
+</template>
+
+
+<template name="adminRoles">
+
+  <select style="width: 70px" class="roles form-control" {{ checkRekous }} >
+    {{#if equals roles "" }}
+    <option selected=selected></option>
+    {{ else }}
+     <option></option>
+    {{/if }}
+
+    {{#if equals roles "admin" }}
+    <option selected=selected>admin</option>
+    {{else}}
+     <option>admin</option>
+    {{/if}}
+
+
+    {{#if equals roles "PWW" }}
+    <option selected=selected>PWW</option>
+    {{ else }}
+     <option>PWW</option>
+    {{/if }}
+
+    {{#if equals roles "" }}
+    <option selected=selected></option>
+    {{ else }}
+     <option></option>
+    {{/if }}
+  </select>
+
+</template>

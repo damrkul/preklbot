@@ -1,0 +1,37 @@
+<template name="add_user">
+{{#if isInRole 'admin'}}
+
+<div class='container'>
+<h2>Add new User to the Bot</h2>
+<br>
+<br>
+<br>
+  <div class="form-group">
+    <label for="ign">IGN - Profile Name</label>
+    <input type="text" class="ign form-control" id="ign" aria-describedby="ignHelp" placeholder="Enter IGN">
+    <small id="ignHelp" class="form-text text-muted">Put in a name we usually identify you by, such as your IGN.</small>
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="text" class="form-control" id="password" placeholder="Password">
+  </div>
+  <button type="submit" class="add_new_user btn btn-primary">Submit</button>
+  <span id="success" class="list-group-item list-group-item-action list-group-item-success"><b>User has been added </b> -  Please go to the <a href="/admin">Users page to Change Privledges</a> if needed.</span>
+  <span id="error" class=" list-group-item list-group-item-action list-group-item-danger">Error: Something bad has happened</span>
+
+</div>
+<script>
+$("#success").hide();
+$("#error").hide();
+</script>
+{{else}} 
+You are not an admin.  So you cannot see this site.  If you're a ROW admin, talk to REKOUS
+
+{{/if }}
+</template>
+
+
