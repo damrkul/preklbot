@@ -1,5 +1,6 @@
 // Config file to edit Token file
 const config= require('./config');
+const player_search= require('./player_search');
 
 
 const plugin= require('./plugins');
@@ -33,6 +34,9 @@ bot.onText(/echo (.+)/, (msg, match) => {
 // Add in Global Variables to use in Plugins..  
 global.MongoClient = require('mongodb').MongoClient;
 global.Request = require("request");
+global.scraper = require('table-scraper');
+//global.exec = require('child_process').execSync;
+global.execSync = require('child_process').execSync;
 
 
 //  LOAD IN PLUGINS
