@@ -1,6 +1,12 @@
 ## preklbot
 
 
+Preklbot is a Web-Managed Telegram Bot.   This allows multiple users to manage settings of a ChatBot via Website.    Users can go in and create their own custom chat triggers via the website.   No Programming/Reloading needed.
+
+This also was designed using a Plugin-Architechture so writing plugins for the bot is very easy as well.
+
+
+
 
 **Installation:**
 
